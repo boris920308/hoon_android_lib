@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">hoon_viewbinding</string>
+    <string name="hello_view_binding">"hello viewbinding</string>
 </resources>
