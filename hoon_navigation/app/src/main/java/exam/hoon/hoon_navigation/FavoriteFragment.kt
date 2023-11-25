@@ -8,24 +8,24 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 
-class HomeFragment : Fragment() {
+class FavoriteFragment : Fragment() {
 
-    private lateinit var btnGoFavorite : Button
+    private lateinit var btnGoSetting : Button
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        return inflater.inflate(R.layout.fragment_favorite, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        btnGoFavorite = view.findViewById(R.id.btn_go_favorite)
-        btnGoFavorite.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_favoriteFragment)
+        btnGoSetting = view.findViewById(R.id.btn_go_setting)
+        btnGoSetting.setOnClickListener {
+            findNavController().navigate(R.id.action_favoriteFragment_to_settingFragment)
         }
 
     }
