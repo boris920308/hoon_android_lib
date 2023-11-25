@@ -2,4 +2,9 @@
     <string name="app_name">hoon_navigation</string>
 
     <string name="hello_home_fragment">Hello Home Fragment!</string>
+    <string name="hello_favorite_fragment">Hello Favorite Fragment!</string>
+    <string name="hello_setting_fragment">Hello Setting Fragment!</string>
+
+    <string name="go_favorite">go favorite</string>
+    <string name="go_setting">go setting</string>
 </resources>

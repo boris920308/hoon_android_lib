@@ -10,6 +10,26 @@
         android:name="exam.hoon.hoon_navigation.HomeFragment"
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home"
+        >
+        <action
+            android:id="@+id/action_homeFragment_to_favoriteFragment"
+            app:destination="@id/favoriteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="exam.hoon.hoon_navigation.FavoriteFragment"
+        android:label="FavoriteFragment"
+        tools:layout="@layout/fragment_favorite"
+        >
+        <action
+            android:id="@+id/action_favoriteFragment_to_settingFragment"
+            app:destination="@id/settingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="exam.hoon.hoon_navigation.SettingFragment"
+        android:label="SettingFragment"
+        tools:layout="@layout/fragment_setting"
         />
 
 </navigation>
