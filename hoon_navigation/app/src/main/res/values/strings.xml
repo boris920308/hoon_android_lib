@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">hoon_navigation</string>
 
+    <string name="title_home">HOME</string>
+    <string name="title_favorite">FAVORITE</string>
+    <string name="title_setting">SETTING</string>
+
     <string name="hello_home_fragment">Hello Home Fragment!</string>
     <string name="hello_favorite_fragment">Hello Favorite Fragment!</string>
     <string name="hello_setting_fragment">Hello Setting Fragment!</string>
