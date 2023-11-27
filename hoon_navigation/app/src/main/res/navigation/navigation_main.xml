@@ -9,8 +9,7 @@
         android:id="@+id/homeFragment"
         android:name="exam.hoon.hoon_navigation.HomeFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/fragment_home"
-        >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_favoriteFragment"
             app:destination="@id/favoriteFragment" />
@@ -19,8 +18,7 @@
         android:id="@+id/favoriteFragment"
         android:name="exam.hoon.hoon_navigation.FavoriteFragment"
         android:label="FavoriteFragment"
-        tools:layout="@layout/fragment_favorite"
-        >
+        tools:layout="@layout/fragment_favorite">
         <action
             android:id="@+id/action_favoriteFragment_to_settingFragment"
             app:destination="@id/settingFragment" />
@@ -29,7 +27,25 @@
         android:id="@+id/settingFragment"
         android:name="exam.hoon.hoon_navigation.SettingFragment"
         android:label="SettingFragment"
-        tools:layout="@layout/fragment_setting"
+        tools:layout="@layout/fragment_setting" />
+
+    <action
+        android:id="@+id/action_global_homeFragment"
+        app:destination="@id/homeFragment"
+        app:popUpTo="@id/homeFragment"
+        app:popUpToInclusive="true"
+        />
+    <action
+        android:id="@+id/action_global_favoriteFragment"
+        app:destination="@id/favoriteFragment"
+        app:popUpTo="@id/favoriteFragment"
+        app:popUpToInclusive="true"
+        />
+    <action
+        android:id="@+id/action_global_settingFragment"
+        app:destination="@id/settingFragment"
+        app:popUpTo="@id/settingFragment"
+        app:popUpToInclusive="true"
         />
 
 </navigation>
