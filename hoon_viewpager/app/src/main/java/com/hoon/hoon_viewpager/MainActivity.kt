@@ -4,7 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.hoon.hoon_viewpager.databinding.ActivityMainBinding
-import com.hoon.hoon_viewpager.withrecycler.WithRecyclerActivity
+import com.hoon.hoon_viewpager.with_item.WithItemActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
 
 
         binding.btnGoRecycler.setOnClickListener {
-            val intent =  Intent(this, WithRecyclerActivity::class.java)
+            val intent =  Intent(this, WithItemActivity::class.java)
             startActivity(intent)
         }
     }

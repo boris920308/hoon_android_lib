@@ -23,7 +23,7 @@
         </activity>
 
         <activity
-            android:name=".withrecycler.WithRecyclerActivity">
+            android:name=".with_item.WithItemActivity">
 
         </activity>
     </application>
