@@ -1,11 +1,9 @@
 package hoon.example.hoon_architecture
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import hoon.example.hoon_architecture.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -20,7 +18,8 @@ class MainActivity : AppCompatActivity() {
 
         val mainRepository = MainRepository()
         val getMainUseCase = GetMainUseCase(mainRepository)
-        mainViewModel = MainViewModel(getMainUseCase)
+        val vmFactory = MainViewModelFactory(getMainUseCase)
+        mainViewModel = ViewModelProvider(this, vmFactory).get(MainViewModel::class.java)
 
         mainViewModel.users.observe(this, Observer { users ->
             showData(users)
