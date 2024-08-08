@@ -1,6 +1,10 @@
 package hoon.example.hoon_architecture
 
-class GetMainUseCase(private val mainRepository: MainRepositoryImpl) {
+import javax.inject.Inject
+
+class GetMainUseCase @Inject constructor(
+    private val mainRepository: MainRepositoryInterface
+) {
     fun execute(): List<MainModel> {
         return mainRepository.getUsers()
     }
