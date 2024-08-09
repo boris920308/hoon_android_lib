@@ -15,7 +15,7 @@ class MainViewModel @Inject constructor(
     val users: LiveData<List<MainModel>> get() = _users
 
     fun loadUsers() {
-        val userList = getMainUseCase.execute()
+        val userList = getMainUseCase()
         _users.value = userList
     }
 }
