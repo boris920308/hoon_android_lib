@@ -34,5 +34,10 @@ class MainActivity : AppCompatActivity() {
             Log.d("boris92", "click btnStartSubscribe")
             awsIoTManager.subscribe("hoon/hello_world")
         }
+
+        binding.btnStartPublish.setOnClickListener {
+            Log.d("boris92", "click btnStopSubscribe")
+            awsIoTManager.publish("hoon/publish_android", "im android")
+        }
     }
 }
