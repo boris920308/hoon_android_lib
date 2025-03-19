@@ -6,6 +6,9 @@ import androidx.annotation.RequiresApi
 import com.amazonaws.mobileconnectors.iot.AWSIotMqttClientStatusCallback
 import com.amazonaws.mobileconnectors.iot.AWSIotMqttManager
 import com.amazonaws.mobileconnectors.iot.AWSIotMqttQos
+import com.google.gson.JsonObject
+import org.eclipse.paho.client.mqttv3.MqttMessage
+import org.json.JSONObject
 import java.io.InputStream
 import java.security.KeyFactory
 import java.security.KeyStore
@@ -125,9 +128,19 @@ class AwsIotManager(private val context: Context) {
 
     fun subscribe(topic: String) {
         mqttManager?.subscribeToTopic(topic, AWSIotMqttQos.QOS0) { topic, message ->
-            println("📩 수신된 메시지: $message (from: $topic)")
+
+            println("subscribe!, from $topic")
+
+            val messageString = String(message)
+
+            try {
+                val jsonObject = JSONObject(messageString)
+                val messageContent = jsonObject.getString("message")
+                println("📩 message : $messageContent ")
+            } catch (e: Exception) {
+                println("err, msg = ${e.message}")
+            }
         }
     }
-
 
 }

@@ -29,5 +29,10 @@ class MainActivity : AppCompatActivity() {
             Log.d("boris92", "click btnDisConnect")
             awsIoTManager.disconnect()
         }
+
+        binding.btnStartSubscribe.setOnClickListener {
+            Log.d("boris92", "click btnStartSubscribe")
+            awsIoTManager.subscribe("hoon/hello_world")
+        }
     }
 }
