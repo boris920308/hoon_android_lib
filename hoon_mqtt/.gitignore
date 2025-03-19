@@ -13,3 +13,6 @@
 .externalNativeBuild
 .cxx
 local.properties
+/src/main/res/raw/amazon_root_ca1.pem
+/src/main/res/raw/certificate_pem_crt
+/src/main/res/raw/private_pem_key
