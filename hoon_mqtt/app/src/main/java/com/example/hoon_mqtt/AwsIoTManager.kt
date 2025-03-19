@@ -6,6 +6,7 @@ import androidx.annotation.RequiresApi
 import com.amazonaws.mobileconnectors.iot.AWSIotMqttClientStatusCallback
 import com.amazonaws.mobileconnectors.iot.AWSIotMqttManager
 import com.amazonaws.mobileconnectors.iot.AWSIotMqttQos
+import com.google.gson.Gson
 import com.google.gson.JsonObject
 import org.eclipse.paho.client.mqttv3.MqttMessage
 import org.json.JSONObject
@@ -126,6 +127,24 @@ class AwsIotManager(private val context: Context) {
         mqttManager?.publishString(message, topic, AWSIotMqttQos.QOS0)
     }
 
+    fun publishUser(topic: String, user: User) {
+        val gson = Gson()
+
+        val messageString = gson.toJson(user)
+
+        try {
+            mqttManager?.publishString(
+                messageString,
+                topic,
+                AWSIotMqttQos.QOS0
+            )
+            println("📤 메시지 전송 완료: $messageString")
+        } catch (e: Exception) {
+            println("⚠️ 메시지 전송 실패: ${e.message}")
+        }
+
+    }
+
     fun subscribe(topic: String) {
         mqttManager?.subscribeToTopic(topic, AWSIotMqttQos.QOS0) { topic, message ->
 
@@ -134,9 +153,9 @@ class AwsIotManager(private val context: Context) {
             val messageString = String(message)
 
             try {
-                val jsonObject = JSONObject(messageString)
-                val messageContent = jsonObject.getString("message")
-                println("📩 message : $messageContent ")
+                val user = Gson().fromJson(messageString, User::class.java)
+
+                println("📩 message : $user ")
             } catch (e: Exception) {
                 println("err, msg = ${e.message}")
             }
