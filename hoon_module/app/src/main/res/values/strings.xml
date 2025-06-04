@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">hoon_module</string>
+
+    <string name="title_main">hello multi module!</string>
 </resources>
