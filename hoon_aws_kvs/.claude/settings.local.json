@@ -11,7 +11,8 @@
       "Bash(git -C /c/hoon/hoon_git/hoon_android_lib/hoon_aws_kvs log --all --pretty=format:\"%h %s\")",
       "Bash(for dir in presentation/ui/screen presentation/ui/component presentation/viewmodel domain/model domain/repository domain/usecase data/repository data/datasource/local data/datasource/remote data/mapper data/dto di)",
       "Bash(do touch \"$dir/.gitkeep\")",
-      "Bash(done)"
+      "Bash(done)",
+      "Bash(find:*)"
     ]
   }
 }
