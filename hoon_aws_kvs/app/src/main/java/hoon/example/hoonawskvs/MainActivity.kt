@@ -1,9 +1,13 @@
 package hoon.example.hoonawskvs
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -16,14 +20,17 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
 import hoon.example.hoonawskvs.presentation.ui.screen.MasterScreen
 import hoon.example.hoonawskvs.presentation.ui.screen.ViewerScreen
 import hoon.example.hoonawskvs.ui.theme.HoonAwsKvsTheme
@@ -32,6 +39,11 @@ enum class Screen {
     Main, Master, Viewer
 }
 
+private val REQUIRED_PERMISSIONS = arrayOf(
+    Manifest.permission.CAMERA,
+    Manifest.permission.RECORD_AUDIO
+)
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +51,22 @@ class MainActivity : ComponentActivity() {
         setContent {
             HoonAwsKvsTheme {
                 var currentScreen by remember { mutableStateOf(Screen.Main) }
+                val context = LocalContext.current
+
+                val permissionLauncher = rememberLauncherForActivityResult(
+                    contract = ActivityResultContracts.RequestMultiplePermissions()
+                ) { permissions ->
+                    // 권한 결과 처리
+                }
+
+                LaunchedEffect(Unit) {
+                    val deniedPermissions = REQUIRED_PERMISSIONS.filter {
+                        ContextCompat.checkSelfPermission(context, it) != PackageManager.PERMISSION_GRANTED
+                    }
+                    if (deniedPermissions.isNotEmpty()) {
+                        permissionLauncher.launch(deniedPermissions.toTypedArray())
+                    }
+                }
 
                 when (currentScreen) {
                     Screen.Main -> {
