@@ -16,11 +16,21 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import hoon.example.hoonawskvs.presentation.ui.screen.MasterScreen
+import hoon.example.hoonawskvs.presentation.ui.screen.ViewerScreen
 import hoon.example.hoonawskvs.ui.theme.HoonAwsKvsTheme
+
+enum class Screen {
+    Main, Master, Viewer
+}
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,12 +38,30 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             HoonAwsKvsTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    MainScreen(
-                        onMasterClick = { /* TODO: Master 화면으로 이동 */ },
-                        onViewerClick = { /* TODO: Viewer 화면으로 이동 */ },
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                var currentScreen by remember { mutableStateOf(Screen.Main) }
+
+                when (currentScreen) {
+                    Screen.Main -> {
+                        Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                            MainScreen(
+                                onMasterClick = { currentScreen = Screen.Master },
+                                onViewerClick = { currentScreen = Screen.Viewer },
+                                modifier = Modifier.padding(innerPadding)
+                            )
+                        }
+                    }
+                    Screen.Master -> {
+                        MasterScreen(
+                            onBackClick = { currentScreen = Screen.Main },
+                            modifier = Modifier.fillMaxSize()
+                        )
+                    }
+                    Screen.Viewer -> {
+                        ViewerScreen(
+                            onBackClick = { currentScreen = Screen.Main },
+                            modifier = Modifier.fillMaxSize()
+                        )
+                    }
                 }
             }
         }
