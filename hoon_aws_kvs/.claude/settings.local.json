@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cat:*)",
+      "Bash(git -C /c/hoon/hoon_git/hoon_android_lib/hoon_aws_kvs log --oneline -10)",
+      "Bash(tree:*)",
+      "Bash(git -C /c/hoon/hoon_git/hoon_android_lib/hoon_aws_kvs log --all --oneline --graph)",
+      "Bash(git -C /c/hoon/hoon_git/hoon_android_lib/hoon_aws_kvs log -1 --format=\"%B\")",
+      "Bash(git -C /c/hoon/hoon_git/hoon_android_lib/hoon_aws_kvs show eafc209:app/build.gradle.kts)",
+      "Bash(git -C /c/hoon/hoon_git/hoon_android_lib/hoon_aws_kvs show:*)",
+      "Bash(git -C /c/hoon/hoon_git/hoon_android_lib/hoon_aws_kvs log --all --pretty=format:\"%h %s\")"
+    ]
+  }
+}
