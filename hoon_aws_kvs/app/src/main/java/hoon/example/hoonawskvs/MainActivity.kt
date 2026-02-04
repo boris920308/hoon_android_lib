@@ -1,8 +1,11 @@
 package hoon.example.hoonawskvs
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
@@ -15,10 +18,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -51,12 +56,16 @@ class MainActivity : ComponentActivity() {
         setContent {
             HoonAwsKvsTheme {
                 var currentScreen by remember { mutableStateOf(Screen.Main) }
+                var showPermissionDialog by remember { mutableStateOf(false) }
                 val context = LocalContext.current
 
                 val permissionLauncher = rememberLauncherForActivityResult(
                     contract = ActivityResultContracts.RequestMultiplePermissions()
                 ) { permissions ->
-                    // 권한 결과 처리
+                    val denied = permissions.any { !it.value }
+                    if (denied) {
+                        showPermissionDialog = true
+                    }
                 }
 
                 LaunchedEffect(Unit) {
@@ -66,6 +75,32 @@ class MainActivity : ComponentActivity() {
                     if (deniedPermissions.isNotEmpty()) {
                         permissionLauncher.launch(deniedPermissions.toTypedArray())
                     }
+                }
+
+                if (showPermissionDialog) {
+                    AlertDialog(
+                        onDismissRequest = { showPermissionDialog = false },
+                        title = { Text("권한 필요") },
+                        text = { Text("카메라와 마이크 권한이 필요합니다. 설정에서 권한을 허용해주세요.") },
+                        confirmButton = {
+                            TextButton(
+                                onClick = {
+                                    showPermissionDialog = false
+                                    val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+                                        data = Uri.fromParts("package", context.packageName, null)
+                                    }
+                                    context.startActivity(intent)
+                                }
+                            ) {
+                                Text("설정으로 이동")
+                            }
+                        },
+                        dismissButton = {
+                            TextButton(onClick = { showPermissionDialog = false }) {
+                                Text("취소")
+                            }
+                        }
+                    )
                 }
 
                 when (currentScreen) {
