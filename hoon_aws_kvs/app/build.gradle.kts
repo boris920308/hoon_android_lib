@@ -6,14 +6,12 @@ plugins {
 
 android {
     namespace = "hoon.example.hoonawskvs"
-    compileSdk {
-        version = release(36)
-    }
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "hoon.example.hoonawskvs"
         minSdk = 24
-        targetSdk = 36
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -50,6 +48,13 @@ dependencies {
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
+
+    // AWS KVS WebRTC
+    implementation(libs.aws.kinesisvideo)
+    implementation(libs.aws.kinesisvideo.signaling)
+    implementation(libs.google.webrtc)
+    implementation(libs.gson)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
