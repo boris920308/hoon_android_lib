@@ -54,3 +54,7 @@ Presentation → Domain ← Data
 - AWS KVS WebRTC 프로젝트
 - Jetpack Compose 사용
 - Master/Viewer 기능 구현 예정
+
+## 작업 스타일
+- 커밋은 최대한 작게 나눠서 진행
+- 변경사항은 최소 단위로 작업
